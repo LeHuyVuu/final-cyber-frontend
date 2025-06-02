@@ -1,0 +1,250 @@
+.minesweeper-container {
+    width: 100%;
+    min-height: 100vh;
+    margin: 28px 0 0;
+    text-align: center;
+
+    .heading {
+        h1 {
+            margin: 0 0 20px;
+            color: #d97720;
+            font-size: 54px;
+            font-weight: bold;
+        }
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        user-select: none;
+
+        .detail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .detail {
+                height: fit-content;
+                width: fit-content;
+                min-width: 250px;
+                margin: 0 20px;
+                padding: 12px 20px;
+                border: 2px solid #ccc;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                font-weight: bold;
+
+                .support {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 20px;
+
+                    .flag {
+                        flex: 1;
+                        font-size: 28px;
+                    }
+
+                    .btn,
+                    .btn:focus {
+                        flex: 1;
+                        padding: 6px 12px;
+                        color: #fff;
+                        text-shadow: 0 0 4px #9c8500;
+                        background-color: #ffd700;
+                        border: none;
+                        border-radius: 6px;
+                        outline: none;
+                        transition: all 0.2s ease;
+                    }
+
+                    .btn:hover {
+                        background-color: #dab900;
+                    }
+
+                    .btn-reset,
+                    .btn-reset:focus {
+                        background-color: #fb8b24;
+                    }
+
+                    .btn-reset:hover {
+                        background-color: #d97720;
+                    }
+                }
+
+                label {
+                    font-weight: 400;
+
+                    i {
+                        color: #777;
+                        width: 32px;
+                    }
+                }
+
+                .your-point {
+                    margin: 8px 0 0;
+
+                    span {
+                        color: #ffd700;
+                        font-size: 32px;
+                        text-shadow: 1px 1px 2px #999;
+                    }
+                }
+
+                .runtime {
+                    margin: 12px 0;
+                }
+
+                .result {
+                    padding: 4px;
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        .high-score {
+            height: fit-content;
+            width: fit-content;
+            min-width: 250px;
+            margin: 0 20px;
+            padding: 12px 20px 4px;
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+
+            .title {
+                font-size: 20px;
+                margin: 0 0 8px;
+            }
+
+            .item {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-top: 2px solid #ccc;
+                font-weight: 500;
+                padding: 8px 0 0;
+                margin: 0 0 8px;
+
+                i {
+                    width: 32px;
+                }
+
+                .score {
+                    min-width: 100px;
+                }
+            }
+
+            .no-score {
+                font-style: italic;
+                font-weight: 400;
+            }
+        }
+
+        table {
+            margin: 0 0 20px;
+            display: block;
+            justify-self: center;
+            width: calc(var(--table-width) * 35)px;
+            border-radius: 10px;
+            overflow: hidden;
+
+            tr {
+                margin: 0;
+                padding: 0;
+                height: 35px;
+                border: none !important;
+
+                td {
+                    margin: 0;
+                    padding: 0;
+                    width: 35px;
+                    border: none !important;
+
+                    p {
+                        margin: 0;
+                        padding: 0;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .content {
+            flex-direction: column;
+            align-items: center;
+
+            .detail-container {
+
+                .detail,
+                .high-score {
+                    width: 500px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .content {
+            table {
+                width: calc(var(--table-width) * 25)px;
+
+                tr {
+                    height: 25px;
+
+                    td {
+                        width: 25px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .content {
+            table {
+                width: calc(var(--table-width) * 20)px;
+
+                tr {
+                    height: 20px;
+
+                    td {
+                        width: 20px;
+
+                        p {
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 440px) {
+
+        .heading {
+            h1 {
+                font-size: 42px;
+            }
+        }
+
+        .content {
+            table {
+                width: calc(var(--table-width) * 15)px;
+
+                tr {
+                    height: 15px;
+
+                    td {
+                        width: 15px;
+                    }
+                }
+            }
+        }
+    }
+}

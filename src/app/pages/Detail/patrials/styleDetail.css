@@ -1,0 +1,80 @@
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+/* PrimeReact custom styles */
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  color: var(--text-light);
+  padding: 1rem 1.25rem;
+  font-weight: 500;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  border-radius: 0;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.p-tabview .p-tabview-panels {
+  padding: 0;
+}
+
+.p-divider.p-divider-horizontal {
+  margin: 1.25rem 0;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+  color: #f7a928;
+}
+
+.p-tag {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.p-tag.p-tag-success {
+  background: #e6f7e6;
+  color: #2e7d32;
+}
+
+.p-tag.p-tag-danger {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.p-tag.p-tag-info {
+  background: #e3f2fd;
+  color: #0277bd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animation effects */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}

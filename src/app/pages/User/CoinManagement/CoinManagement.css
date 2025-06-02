@@ -1,0 +1,234 @@
+.coinmanagement-container {
+    width: 100%;
+    max-width: 900px;
+
+    .coinmanagement-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 68px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 20px;
+
+            .left-heading,
+            .right-heading {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                .fa-coins {
+                    color: #ffd700;
+                    font-size: 24px;
+                }
+
+                .point {
+                    color: #fb8b24;
+                    font-weight: bold;
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .content {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 20px;
+
+            h3 {
+                margin: 0 0 16px;
+                display: flex;
+
+                img {
+                    margin: 0 8px 0 0;
+                }
+            }
+
+            .content-box {
+                display: flex;
+                justify-content: space-between;
+
+                .blue-box {
+                    padding: 20px 36px;
+                    width: 540px;
+                    height: 330px;
+                    color: #fff;
+                    background: url('../../../assets/TikiPics/DepositCoin.png');
+                    border-radius: 12px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .title {
+                        font-weight: 500;
+                    }
+
+                    .form-point {
+                        margin: 0 0 28px;
+                        font-size: 32px;
+                        border-bottom: 1px solid #2991ff;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 12px;
+
+                        i {
+                            color: #ffd700;
+                        }
+
+                        input {
+                            color: #fff;
+                            font-size: 44px;
+                            font-weight: bold;
+                            width: 100%;
+                            outline: none;
+                            background-color: transparent;
+                        }
+
+                        input[type='number']::-webkit-inner-spin-button,
+                        input[type='number']::-webkit-outer-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+
+                    .amount-box {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .item {
+                            width: fit-content;
+                            padding: 6px 10px;
+                            background-color: #2991ff;
+                            font-size: 14px;
+                            font-weight: bold;
+                            border-radius: 8px;
+                            cursor: pointer;
+                        }
+
+                        .chosen {
+                            color: #007bff;
+                            background-color: #fff;
+                        }
+
+                    }
+                }
+
+                .info-vertical {
+                    border-left: 1px solid #ccc;
+                }
+
+                .form-payment {
+                    display: flex;
+                    flex-direction: column;
+                    width: 280px;
+
+                    .item {
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0 0 12px;
+                    }
+
+                    .message {
+                        height: 22px;
+                        font-size: 14px;
+                        color: #28a745;
+                    }
+
+                    button {
+                        width: 100%;
+                        color: #007bff;
+                        background-color: transparent;
+                        padding: 6px 12px;
+                        margin: 4px 0 24px;
+                        font-size: 14px;
+                        border: 1px solid #007bff;
+                        border-radius: 8px;
+                        text-transform: uppercase;
+                        transition: all 0.2s ease;
+                    }
+
+                    button:hover {
+                        color: #fff;
+                        background-color: #0068d6;
+                        border: 1px solid #0068d6;
+                    }
+
+                    ul {
+                        list-style-type: disc;
+                        padding-left: 20px;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .voucher-content {
+                form {
+                    display: flex;
+                    flex-direction: column;
+
+                    .form-radio {
+                        display: flex;
+                        align-items: center;
+                        gap: 200px;
+                        margin: 24px 0;
+
+                        label {
+                            display: flex;
+
+                            img {
+                                margin: 0 12px;
+                            }
+                        }
+                    }
+
+                    .form-input {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+
+                        input {
+                            outline: none;
+                            padding: 4px 12px;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                        }
+
+                        input:focus {
+                            border-color: #007bff80;
+                            box-shadow: 0 0 0 0.25rem #007bff40;
+                        }
+
+                        button {
+                            color: #fff;
+                            background-color: #007bff;
+                            padding: 6px 12px;
+                            font-size: 14px;
+                            border: 1px solid #007bff;
+                            border-radius: 4px;
+                            text-transform: uppercase;
+                            transition: all 0.2s ease;
+                        }
+    
+                        button:hover {
+                            background-color: #0068d6;
+                            border: 1px solid #0068d6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

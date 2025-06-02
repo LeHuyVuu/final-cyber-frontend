@@ -1,0 +1,92 @@
+@keyframes updown {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.dice-logo {
+    position: absolute;
+    top: 180px;
+    left: 20px;
+    z-index: 40;
+
+    .link-logo {
+        animation: updown 1.5s ease-in-out infinite;
+
+        img {
+            position: sticky;
+            width: 100px;
+            height: 100px;
+        }
+
+        .img-dice {
+            filter: drop-shadow(0 0 8px #800080);
+        }
+
+        .img-minesweeper {
+            filter: drop-shadow(0 0 8px #fb8b24);
+        }
+    }
+
+    i {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        transition: color 0.1s;
+    }
+
+    i:hover {
+        color: #dc3545;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 50;
+
+    .popup {
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 12px;
+        width: 1000px;
+        height: 90vh;
+        overflow: hidden;
+        /* overflow: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none; */
+        position: relative;
+        transition: all 1s ease-in-out;
+
+        .btn-close {
+            position: absolute;
+            z-index: 51;
+            padding: 6px 12px;
+            margin: 12px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            right: 0;
+        }
+    }
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}

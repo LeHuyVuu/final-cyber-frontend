@@ -1,0 +1,40 @@
+/* Tùy chỉnh hộp checkbox */
+.p-checkbox-box {
+  border-radius: 8px !; /* Bo góc cho hộp checkbox */
+  border: 1px solid #b0b0b0; /* Đặt màu viền mặc định */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển tiếp khi hover hoặc thay đổi trạng thái */
+  position: relative; /* Cần để điều chỉnh vị trí của các pseudo-element */
+}
+
+/* Tùy chỉnh hộp checkbox khi được chọn */
+.p-checkbox-box::before {
+  content: ""; /* Nội dung giả cho pseudo-element */
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background-color: transparent; /* Màu nền ban đầu là trong suốt */
+  border-radius: 50%; /* Làm cho phần checkmark có hình tròn */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển tiếp khi thay đổi trạng thái */
+}
+
+
+
+/* Màu viền khi hover (khi di chuột qua) */
+.p-checkbox-box:hover {
+  border-color: #000000; /* Màu viền khi hover */
+}
+
+/* Tùy chỉnh nhãn checkbox */
+.p-checkbox-label {
+  font-size: 16px; /* Cỡ chữ của nhãn */
+  color: #000000; /* Màu chữ của nhãn */
+  font-weight: 600; /* Chữ đậm */
+  margin-left: 8px; /* Khoảng cách giữa nhãn và checkbox */
+}
+
+/* Tùy chỉnh nhãn khi hover */
+.p-checkbox-label:hover {
+  color: #1a1a2e; /* Đổi màu chữ khi hover vào nhãn */
+}

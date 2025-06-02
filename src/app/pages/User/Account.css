@@ -1,0 +1,25 @@
+.account-container {
+    width: 100%;
+    min-height: 110vh;
+    margin: auto;
+    margin-bottom: -12rem;
+    padding: 20px 15px 400px;
+    background-color: #e7e7e7;
+
+    .account-content {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 20px 0 16px;
+    }
+
+    h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+    }
+}

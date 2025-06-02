@@ -1,0 +1,45 @@
+.accountsidebar-container {
+    width: fit-content;
+    max-width: 280px;
+    margin: 0 32px 0 0;
+
+    .thisuser {
+        display: flex;
+        margin: 0 0 12px;
+        padding: 0 0 0 7px;
+        width: 100%;
+        overflow: hidden;
+
+        img {
+            width: 51px;
+            height: 51px;
+            margin: 0 12px 0 0;
+            border-radius: 50%;
+        }
+
+        .user-name {
+            width: 100%;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 7px 20px;
+
+            i {
+                width: 24px;
+                text-align: center;
+                color: #999;
+            }
+        }
+    }
+}

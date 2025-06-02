@@ -1,0 +1,76 @@
+.updateemail-container {
+    width: 100%;
+    max-width: 900px;
+
+    .updateemail-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        padding: 20px;
+
+        form {
+            width: 400px;
+            padding: 16px;
+            border: 1px solid #ebebf0;
+            box-sizing: border-box;
+            border-radius: 4px;
+
+            .form-email {
+                margin: 0 0 4px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                i {
+                    width: 28px;
+                    color: #999;
+                }
+
+                input {
+                    outline: none;
+                    width: 80%;
+                    padding: 4px 12px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+
+                input:focus {
+                    border-color: #007bff80;
+                    box-shadow: 0 0 0 0.25rem #007bff40;
+                }
+            }
+
+            .error-message {
+                height: 24px;
+                font-size: 14px;
+                font-style: italic;
+                color: #dc3545;
+            }
+
+            .success-message {
+                height: 24px;
+                font-size: 14px;
+                font-style: italic;
+                color: #28a745;
+            }
+
+            .btn {
+                text-align: center;
+                border: none;
+                width: 100%;
+                padding: 6px 12px;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #007bff;
+            }
+
+            .btn-div {
+                cursor: default;
+                background-color: #80bdff;
+            }
+        }
+    }
+}

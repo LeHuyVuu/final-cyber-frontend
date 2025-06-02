@@ -1,0 +1,114 @@
+.createaddress-container {
+    width: 100%;
+    max-width: 900px;
+
+    .createaddress-content {
+        padding: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 12px;
+
+            .form-group {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                border: none;
+                padding: 0;
+
+                label {
+                    width: 140px;
+                }
+
+                input,
+                textarea {
+                    outline: none;
+                    width: 70%;
+                    padding: 4px 12px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+            }
+
+            .form-name,
+            .form-phone,
+            .form-address {
+
+                input:focus,
+                textarea:focus {
+                    border-color: #007bff80;
+                    box-shadow: 0 0 0 0.25rem #007bff40;
+                }
+            }
+
+            .form-addresstype {
+                justify-content: start;
+                margin: 16px 0 0;
+
+                .toggle-options {
+                    display: flex;
+                    gap: 30px;
+
+                    label {
+                        width: fit-content;
+                        cursor: pointer;
+
+                        input {
+                            width: fit-content;
+                            margin: 0 10px 0 0;
+                        }
+                    }
+                }
+            }
+
+            .form-default {
+                margin: 8px 0 20px;
+
+                label {
+                    width: fit-content;
+                    margin: 0 0 0 140px;
+
+                    input {
+                        margin: 0 8px 0 0;
+                    }
+                }
+            }
+        }
+
+        .btn {
+            margin: 0 0 0 140px;
+            width: 20%;
+            min-width: 120px;
+
+            height: fit-content;
+            color: #fff;
+            background-color: #007bff;
+            padding: 6px 0;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            color: #fff;
+            background-color: #0068d6;
+            border: 2px solid #0068d6;
+        }
+
+        .btn-delete {
+            color: #007bff;
+            background-color: #fff;
+            padding: 6px 0;
+            margin-top: 20px;
+            text-transform: none;
+            border: 2px solid #007bff;
+        }
+    }
+}

@@ -1,0 +1,98 @@
+.notification-container {
+    width: 100%;
+    max-width: 900px;
+
+    .notification-content {
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+
+        .menuContainer {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+
+            .menuBar {
+                width: 80%;
+                max-width: 500px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                background-color: #fff;
+
+                .menuItem {
+                    flex: 1;
+                    padding: 12px 0 10px;
+                    font-size: 20px;
+                    color: #666;
+                    cursor: pointer;
+                    position: relative;
+                    text-align: center;
+                    border-bottom: 2px solid #fff;
+                }
+
+                .activeMenuItem {
+                    color: #007bff;
+                    border-bottom: 2px solid #007bff;
+                }
+            }
+
+            .fa-ellipsis-vertical {
+                width: 20%;
+                max-width: 80px;
+                height: 55px;
+                font-size: 20px;
+                background-color: #fdd835;
+                display: block;
+                text-align: center;
+                align-self: center;
+                align-content: center;
+                cursor: pointer;
+            }
+
+            .dropdownMenu {
+                position: absolute;
+                top: 50px;
+                right: 0;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                min-width: 160px;
+                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+                user-select: none;
+
+                .dropdownItem {
+                    display: block;
+                    padding: 10px;
+                    color: #333;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .tabContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+
+            .message {
+                margin: 0 0 20px;
+                font-size: 14px;
+                color: #555;
+            }
+
+            button {
+                color: #fff;
+                background-color: #007bff;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                font-weight: bold;
+            }
+        }
+    }
+}

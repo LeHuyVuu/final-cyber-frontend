@@ -1,0 +1,73 @@
+.address-container {
+    width: 100%;
+    max-width: 900px;
+
+    .address-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        .item {
+            display: flex;
+            background-color: #fff;
+        }
+
+        .add-address {
+            height: 60px;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed #ccc;
+
+            i {
+                margin: 0 20px;
+                color: #999;
+                font-size: 20px;
+            }
+
+            span {
+                color: #007bff;
+            }
+        }
+
+        .address-item-container {
+            justify-content: space-between;
+            padding: 16px;
+            border-radius: 4px;
+            font-size: 14px;
+
+            .address-item {
+                flex-direction: column;
+                color: #777;
+                gap: 4px;
+                width: 88%;
+                word-wrap: break-word;
+
+                .option-name-1 {
+                    margin: 0 0 6px;
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    .defaultaddress {
+                        color: #28a745;
+                        font-size: 12px;
+
+                        i {
+                            margin: 0 4px 0 0;
+                        }
+                    }
+                }
+
+                span {
+                    color: #000;
+                }
+            }
+
+            a {
+                padding: 6px 12px;
+                color: #007bff;
+            }
+        }
+    }
+}
