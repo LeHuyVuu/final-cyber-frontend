@@ -80,6 +80,11 @@ export default function AdminLayout() {
           >
             Dashboard
           </button>
+           <button className="p-4 text-left hover:bg-gray-700"
+            onClick={() => navigate("/")}
+          >
+            My Store
+          </button>
         </nav>
       </div>
 

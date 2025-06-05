@@ -4,6 +4,7 @@ import axios from "axios";
 import { sCountItem } from "../../context/store.js";
 import Search from "./Search.jsx";
 import GameShortCut from "../../pages/GameShortCut/GameShortCut.jsx";
+import API_BASE_URL from "../../apiConfig.js";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -28,7 +29,7 @@ export default function Header() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("https://localhost:44376/api/Category", {
+        const res = await axios.get(`${API_BASE_URL}/api/Category`, {
           params: {
             page: 1,
             pageSize: 30,

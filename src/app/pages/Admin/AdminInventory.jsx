@@ -20,10 +20,10 @@ export default function AdminInventory() {
   const [editingProduct, setEditingProduct] = useState(null);
   const [editDialogVisible, setEditDialogVisible] = useState(false);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 10 });
-
   const [searchTerm, setSearchTerm] = useState('');
   const [stockFilter, setStockFilter] = useState('all');
   const [priceSortOrder, setPriceSortOrder] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // ✅ Skeleton loading state
 
   const debouncedFetch = useRef(
     debounce((page, pageSize, sTerm, sFilter, pSort) => {
@@ -33,6 +33,7 @@ export default function AdminInventory() {
 
   const fetchProducts = useCallback(async (page, pageSize, sTerm = '', sFilter = 'all', pSort = null) => {
     try {
+      setIsLoading(true);
       const params = {
         page,
         pageSize,
@@ -50,6 +51,8 @@ export default function AdminInventory() {
       setProducts(data?.products || []);
     } catch (err) {
       toast.current?.show({ severity: 'error', summary: 'Lỗi', detail: 'Không thể tải sản phẩm' });
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -82,13 +85,13 @@ export default function AdminInventory() {
     try {
       const updated = {
         productid: editingProduct.productid,
-        productname: Object.prototype.hasOwnProperty.call(editBuffer.current, "productname") ? editBuffer.current.productname : editingProduct.productname,
-        image: Object.prototype.hasOwnProperty.call(editBuffer.current, "image") ? editBuffer.current.image : editingProduct.image,
-        brand: Object.prototype.hasOwnProperty.call(editBuffer.current, "brand") ? editBuffer.current.brand : editingProduct.brand,
-        sku: Object.prototype.hasOwnProperty.call(editBuffer.current, "sku") ? editBuffer.current.sku : editingProduct.sku,
-        price: Object.prototype.hasOwnProperty.call(editBuffer.current, "price") ? editBuffer.current.price : editingProduct.price,
-        discount_price: Object.prototype.hasOwnProperty.call(editBuffer.current, "discount_price") ? editBuffer.current.discount_price : editingProduct.discount_price,
-        stock_quantity: Object.prototype.hasOwnProperty.call(editBuffer.current, "stock_quantity") ? editBuffer.current.stock_quantity : editingProduct.stock_quantity
+        productname: editBuffer.current.productname ?? editingProduct.productname,
+        image: editBuffer.current.image ?? editingProduct.image,
+        brand: editBuffer.current.brand ?? editingProduct.brand,
+        sku: editBuffer.current.sku ?? editingProduct.sku,
+        price: editBuffer.current.price ?? editingProduct.price,
+        discount_price: editBuffer.current.discount_price ?? editingProduct.discount_price,
+        stock_quantity: editBuffer.current.stock_quantity ?? editingProduct.stock_quantity
       };
 
       await axios.put(`${API_BASE_URL}/api/Products/${editingProduct.productid}`, updated, {
@@ -145,7 +148,6 @@ export default function AdminInventory() {
     </div>
   ), [handleEdit, handleDelete]);
 
-  // 💡 Local search + pagination
   const filteredProducts = products.filter((p) =>
     p.productname?.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -172,7 +174,6 @@ export default function AdminInventory() {
           />
         </div>
 
-
         <Dropdown
           value={stockFilter}
           options={[
@@ -197,31 +198,42 @@ export default function AdminInventory() {
         />
       </div>
 
-      <DataTable
-        value={paginatedProducts}
-        key="productid"
-        paginator
-        rows={pagination.pageSize}
-        totalRecords={filteredProducts.length}
-        lazy
-        first={(pagination.page - 1) * pagination.pageSize}
-        onPage={(e) => setPagination(prev => ({ ...prev, page: e.page + 1, pageSize: e.rows }))}
-        className="shadow rounded bg-white"
-        tableStyle={{ minWidth: '60rem' }}
-      >
-        <Column field="productid" header="ID" sortable />
-        <Column field="productname" header="Tên sản phẩm" sortable />
-        <Column header="Hình ảnh" body={imageTemplate} />
-        <Column field="brand" header="Thương hiệu" />
-        <Column field="sku" header="Mã SKU" />
-        <Column field="price" header="Giá" body={priceTemplate} sortable />
-        <Column field="discount_price" header="Giá giảm" body={priceTemplate} />
-        <Column field="stock_quantity" header="Kho" />
-        <Column header="Thao tác" body={actionTemplate} />
-      </DataTable>
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="shadow rounded p-4 bg-white space-y-2 animate-pulse">
+              <div className="h-16 w-16 bg-gray-200 rounded" />
+              <div className="h-4 bg-gray-200 rounded w-3/4" />
+              <div className="h-4 bg-gray-200 rounded w-1/2" />
+              <div className="h-4 bg-gray-200 rounded w-2/3" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <DataTable
+          value={paginatedProducts}
+          key="productid"
+          paginator
+          rows={pagination.pageSize}
+          totalRecords={filteredProducts.length}
+          lazy
+          first={(pagination.page - 1) * pagination.pageSize}
+          onPage={(e) => setPagination(prev => ({ ...prev, page: e.page + 1, pageSize: e.rows }))}
+          className="shadow rounded bg-white"
+          tableStyle={{ minWidth: '60rem' }}
+        >
+          <Column field="productid" header="ID" sortable />
+          <Column field="productname" header="Tên sản phẩm" sortable />
+          <Column header="Hình ảnh" body={imageTemplate} />
+          <Column field="brand" header="Thương hiệu" />
+          <Column field="sku" header="Mã SKU" />
+          <Column field="price" header="Giá" body={priceTemplate} sortable />
+          <Column field="discount_price" header="Giá giảm" body={priceTemplate} />
+          <Column field="stock_quantity" header="Kho" />
+          <Column header="Thao tác" body={actionTemplate} />
+        </DataTable>
+      )}
 
-      {/* Dialog cập nhật (giữ nguyên như bạn đã viết) */}
-      {/* Dialog cập nhật */}
       <Dialog
         header="Cập nhật sản phẩm"
         visible={editDialogVisible}
@@ -233,76 +245,27 @@ export default function AdminInventory() {
         }}
       >
         <div className="p-fluid space-y-4">
-          <div>
-            <label>Tên sản phẩm</label>
-            <InputText
-              defaultValue={editingProduct?.productname || ''}
-              onChange={(e) => editBuffer.current.productname = e.target.value}
-            />
-          </div>
-
-          <div>
-            <label>Giá</label>
-            <InputText
-              defaultValue={editingProduct?.price ?? ''}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value !== '') editBuffer.current.price = parseFloat(value);
-              }}
-            />
-          </div>
-
-          <div>
-            <label>Giá giảm</label>
-            <InputText
-              defaultValue={editingProduct?.discount_price ?? ''}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value !== '') editBuffer.current.discount_price = parseFloat(value);
-              }}
-            />
-          </div>
-
-          <div>
-            <label>Số lượng kho</label>
-            <InputText
-              defaultValue={editingProduct?.stock_quantity ?? ''}
-              onChange={(e) => {
-                const value = e.target.value;
-                editBuffer.current.stock_quantity = value === '' ? null : parseInt(value);
-              }}
-            />
-          </div>
-
-          <div>
-            <label>Hình ảnh (URL)</label>
-            <InputText
-              defaultValue={editingProduct?.image || ''}
-              onChange={(e) => {
-                if (e.target.value !== '') editBuffer.current.image = e.target.value;
-              }}
-            />
-          </div>
-
-          <div>
-            <label>Thương hiệu</label>
-            <InputText
-              defaultValue={editingProduct?.brand || ''}
-              onChange={(e) => {
-                if (e.target.value !== '') editBuffer.current.brand = e.target.value;
-              }}
-            />
-          </div>
-
-          <div>
-            <label>Mã SKU</label>
-            <InputText
-              defaultValue={editingProduct?.sku || ''}
-              onChange={(e) => {
-                if (e.target.value !== '') editBuffer.current.sku = e.target.value;
-              }}
-            />
-          </div>
+          {[
+            { label: "Tên sản phẩm", key: "productname" },
+            { label: "Giá", key: "price", type: "number" },
+            { label: "Giá giảm", key: "discount_price", type: "number" },
+            { label: "Số lượng kho", key: "stock_quantity", type: "number" },
+            { label: "Hình ảnh (URL)", key: "image" },
+            { label: "Thương hiệu", key: "brand" },
+            { label: "Mã SKU", key: "sku" }
+          ].map(({ label, key, type = "text" }) => (
+            <div key={key}>
+              <label>{label}</label>
+              <InputText
+                type={type}
+                defaultValue={editingProduct?.[key] ?? ""}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  editBuffer.current[key] = type === "number" ? parseFloat(value) : value;
+                }}
+              />
+            </div>
+          ))}
         </div>
 
         <div className="flex justify-end mt-4 gap-2">
@@ -313,5 +276,3 @@ export default function AdminInventory() {
     </div>
   );
 }
-
-

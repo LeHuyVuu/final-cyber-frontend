@@ -17,9 +17,11 @@ export default function UserManagement() {
   const [editingUser, setEditingUser] = useState(null);
   const [editDialogVisible, setEditDialogVisible] = useState(false);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 10, totalItems: 0 });
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchUsers = useCallback(async (page, pageSize) => {
     try {
+      setIsLoading(true);
       const res = await axios.get(`${API_BASE_URL}/api/User`, {
         params: {
           page,
@@ -30,7 +32,7 @@ export default function UserManagement() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = res.data?.data;
-      setUsers(data?.users || data?.result || []); // tùy backend trả về
+      setUsers(data?.users || data?.result || []);
       setPagination({
         page: data?.pagination?.page,
         pageSize: data?.pagination?.pageSize,
@@ -38,6 +40,8 @@ export default function UserManagement() {
       });
     } catch {
       toast.current?.show({ severity: "error", summary: "Lỗi", detail: "Không thể tải người dùng" });
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -107,27 +111,42 @@ export default function UserManagement() {
       <ConfirmDialog />
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Quản lý người dùng</h2>
 
-      <DataTable
-        value={users}
-        key="userid"
-        paginator
-        rows={pagination.pageSize}
-        totalRecords={pagination.totalItems}
-        lazy
-        first={(pagination.page - 1) * pagination.pageSize}
-        onPage={(e) => setPagination((prev) => ({ ...prev, page: e.page + 1, pageSize: e.rows }))}
-        className="shadow rounded bg-white"
-        tableStyle={{ minWidth: "60rem" }}
-      >
-        <Column field="userid" header="ID" sortable />
-        <Column field="fullname" header="Họ tên" sortable />
-        <Column field="username" header="Tên đăng nhập" sortable />
-        <Column field="email" header="Email" sortable />
-        <Column field="phone" header="Điện thoại" sortable />
-        <Column field="role" header="Vai trò" sortable />
-        <Column field="status" header="Trạng thái" body={(row) => (row.status ? "Hoạt động" : "Khoá")} sortable />
-        <Column header="Thao tác" body={actionTemplate} />
-      </DataTable>
+      {isLoading ? (
+        <div className="space-y-3">
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="flex items-center space-x-4 p-4 bg-white rounded shadow animate-pulse">
+              <div className="h-6 w-6 bg-gray-300 rounded" />
+              <div className="flex-1 space-y-2 py-1">
+                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+              </div>
+              <div className="h-6 w-6 bg-gray-300 rounded" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <DataTable
+          value={users}
+          key="userid"
+          paginator
+          rows={pagination.pageSize}
+          totalRecords={pagination.totalItems}
+          lazy
+          first={(pagination.page - 1) * pagination.pageSize}
+          onPage={(e) => setPagination((prev) => ({ ...prev, page: e.page + 1, pageSize: e.rows }))}
+          className="shadow rounded bg-white"
+          tableStyle={{ minWidth: "60rem" }}
+        >
+          <Column field="userid" header="ID" sortable />
+          <Column field="fullname" header="Họ tên" sortable />
+          <Column field="username" header="Tên đăng nhập" sortable />
+          <Column field="email" header="Email" sortable />
+          <Column field="phone" header="Điện thoại" sortable />
+          <Column field="role" header="Vai trò" sortable />
+          <Column field="status" header="Trạng thái" body={(row) => (row.status ? "Hoạt động" : "Khoá")} sortable />
+          <Column header="Thao tác" body={actionTemplate} />
+        </DataTable>
+      )}
 
       <Dialog
         header="Cập nhật người dùng"
@@ -165,7 +184,6 @@ export default function UserManagement() {
               onChange={(e) => setEditingUser((prev) => ({ ...prev, role: e.target.value }))}
             />
           </div>
-          {/* Có thể bổ sung các trường khác nếu muốn */}
         </div>
         <div className="flex justify-end mt-4 gap-2">
           <Button label="Huỷ" icon="pi pi-times" className="p-button-text" onClick={() => setEditDialogVisible(false)} />

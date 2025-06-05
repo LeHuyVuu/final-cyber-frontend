@@ -3,12 +3,14 @@ import { Rating } from "primereact/rating";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link, useParams } from "react-router-dom";
 import API_BASE_URL from "../../../apiConfig";
+import SkeletonLoader from "../../../components/SkeletonLoader/SkeletonLoader.jsx"; // Cập nhật đúng đường dẫn file của bạn
 
 const ProductListing = () => {
   const { categoryId } = useParams();
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); // 👈 Thêm trạng thái loading
 
   const formatCurrency = (value) =>
     new Intl.NumberFormat("vi-VN", {
@@ -18,14 +20,15 @@ const ProductListing = () => {
     }).format(value);
 
   useEffect(() => {
-    const controller = new AbortController(); // ✅ Create AbortController
+    const controller = new AbortController();
     const signal = controller.signal;
 
     const fetchProducts = async () => {
       try {
+        setIsLoading(true); // 👈 Bắt đầu loading
         const res = await fetch(
           `${API_BASE_URL}/api/Products/category/${categoryId}?page=${currentPage}&pageSize=10&sortBy=productid&sortOrder=asc`,
-          { signal } // ✅ Attach signal here
+          { signal }
         );
         const json = await res.json();
         const newProducts = json.data.products;
@@ -38,13 +41,15 @@ const ProductListing = () => {
         } else {
           console.error("Failed to fetch products:", error);
         }
+      } finally {
+        setIsLoading(false); // 👈 Kết thúc loading
       }
     };
 
     fetchProducts();
 
     return () => {
-      controller.abort(); // ✅ Cleanup to abort the request
+      controller.abort();
     };
   }, [categoryId, currentPage]);
 
@@ -104,7 +109,9 @@ const ProductListing = () => {
         hasMore={hasMore}
       >
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {products.length > 0 ? (
+          {isLoading && products.length === 0 ? (
+            <SkeletonLoader type="card" count={10} width="100%" height="300px" />
+          ) : products.length > 0 ? (
             products.map((product) => (
               <div key={product.productid}>{itemTemplate(product)}</div>
             ))
